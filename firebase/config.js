@@ -23,8 +23,8 @@ const firebaseConfig = {
   firebase.initializeApp( firebaseConfig )
 
   // init firestore
-  const projectFirestore = firebase.firestore();
+  const db = firebase.firestore();
 
   export{
-      projectFirestore
+      db
   }
