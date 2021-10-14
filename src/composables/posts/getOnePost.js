@@ -9,6 +9,9 @@ const loadPost = () => {
     const load = async (id) => {
         try{
             const res = await db.collection('posts').doc(id).get();
+
+            if(! res.exists )  throw Error('this post does not exist !')
+            
             post.value =  { ...res.data(), id };
             
         }catch(err){
