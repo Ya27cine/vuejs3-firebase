@@ -1,9 +1,12 @@
-<template lang="">
+<template >
     <h1>Blog</h1>
     <h3>List Posts :</h3>
-    <div v-for="post in posts"  :key="post.id">
-        <OnePost :post="post"  />
+    <div class="row">
+        <div class="col-md-6" v-for="post in posts"  :key="post.id">
+            <OnePost :post="post"  />
+        </div>
     </div>
+    
 </template>
 <script>
     import { ref } from 'vue'
@@ -21,6 +24,7 @@ export default {
 
         // get post:
         load();
+
 
         return {
             posts,
