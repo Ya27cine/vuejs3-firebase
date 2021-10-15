@@ -8,11 +8,15 @@ const loadPosts = () => {
 
     const load = async () => {
         try{
-            const res = await db.collection('posts').get();
-            posts.value = res.docs.map( doc =>{
-                console.log(doc.data())
-                return  { ...doc.data(), id: doc.id }
-            })
+             await db.collection('posts').onSnapshot( res =>
+
+                posts.value = res.docs.map( doc =>{
+                    console.log(doc.data())
+                    return  { ...doc.data(), id: doc.id }
+                })
+
+             )
+           
         }catch(err){
             error.value = err.message;
         }
