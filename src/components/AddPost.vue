@@ -2,7 +2,7 @@
 
     <div class="row">
         <div class="col-md-6 mx-auto">
-            <form @submit.prevent="addPost">
+            <form @submit.prevent="persistPost(post)">
                 <div class="form-group">
                     <label for="Title">Title</label>
                     <input v-model="post.title" type="text"  id="Title" placeholder="Title" class="form-control">
@@ -18,7 +18,10 @@
     {{ post }}
 </template>
 <script>
-import { reactive }from 'vue'
+import { reactive, ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { db } from './../firebase/config'
+
 export default {
     setup() {
         const post = reactive({
@@ -26,10 +29,24 @@ export default {
             content: '',
             tags: ['javaScript']
         });
+        const error = ref(null)
+
+        const router = useRouter();
+
+        // Methods :
+        const persistPost = async (post) => {
+            try {
+                 const res  = await db.collection('posts').add( post );
+                 router.push({name: 'Home'})
+            } catch (er) {
+                error.value  = er.message
+            }
+        }
         
      
         return{
-            post
+            post,
+            persistPost
         }
     }
     
