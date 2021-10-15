@@ -2,10 +2,10 @@
     <h1>Blog</h1>
     
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-6">
             <h3>List Posts :</h3>
         </div>
-        <div class="col-md-3"> 
+        <div class="col-md-6"> 
             <router-link :to="{name: 'add-post'}" class="btn btn-success">Add</router-link>
         </div>
     </div>

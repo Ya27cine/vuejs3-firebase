@@ -12,18 +12,37 @@
                 </router-link>
 
                 <button class="btn btn-info mx-1">Edit</button>
-                <button class="btn btn-danger">Delete</button>
+                <button @click="deletePost(post.id)" class="btn btn-danger">Delete</button>
         </div>
     </div>
 </template>
 
 <script>
 import { ref, computed} from 'vue'
+import { useRouter } from 'vue-router'
+import { db } from './../firebase/config'
 export default {
     props: ['post'],
     setup(props) {
 
         const show = ref(true)
+        const error = ref(null);
+        const router = useRouter();
+
+
+        // Methods :
+        const deletePost = async (id) => { 
+            try {
+                 let retVal = confirm("Do you want to delete this post ?");
+                 if( retVal == true ){
+                    const res =  await  db.collection('posts').doc(id).delete();
+                    console.log( res )
+                    router.push({name: 'Home'})
+                 }
+            } catch (er) {
+                error.value = er.message;
+            }
+        }
         
         const extrait = 
                 computed( 
@@ -32,7 +51,9 @@ export default {
 
         return {
             extrait,
-            show
+            show,
+            error,
+            deletePost
         }
     }
 }
