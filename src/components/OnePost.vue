@@ -22,8 +22,14 @@ import { ref, computed} from 'vue'
 export default {
     props: ['post'],
     setup(props) {
+
         const show = ref(true)
-        const extrait = computed( () => props.post.content.substring(0, 17)+ '...');
+        
+        const extrait = 
+                computed( 
+                    () => props.post.content.substring(0, 17)+ '...'
+                );
+
         return {
             extrait,
             show

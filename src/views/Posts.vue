@@ -1,6 +1,15 @@
 <template >
     <h1>Blog</h1>
-    <h3>List Posts :</h3>
+    
+    <div class="row">
+        <div class="col-md-9">
+            <h3>List Posts :</h3>
+        </div>
+        <div class="col-md-3"> 
+            <router-link :to="{name: 'add-post'}" class="btn btn-success">Add</router-link>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-6" v-for="post in posts"  :key="post.id">
             <OnePost :post="post"  />
